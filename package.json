@@ -1,7 +1,7 @@
 {
   "name": "omega-models",
   "version": "0.1.0",
-  "description": "A database ORM designed to work with the Omega webframework. Supports custom backends.",
+  "description": "An elegant ORM solution for node.js. Intended to be used with the omega web framework, but not required.",
   "main": "models.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha tests --reporter spec"

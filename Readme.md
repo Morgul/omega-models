@@ -1,6 +1,6 @@
 # Omega Models
 
-A much more sane nodejs ORM that doesn't suck. Intended for use with the omega web framework, but not required.
+An elegant ORM solution for node.js. Intended to be used with the omega web framework, but not required.
 
 ## Status
 
