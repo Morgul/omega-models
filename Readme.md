@@ -2,6 +2,13 @@
 
 A much more sane nodejs ORM that doesn't suck. Intended for use with the omega web framework, but not required.
 
+## Status
+
+Currently, this is only just starting to be built. It currently doesn't function, but the implemented parts have unit
+tests. I expect in a short while I should have an initial implementation.
+
+If you want to see what using it will look like, check out 'sample.js' in the root of the project.
+
 ## Fields
 
 All fields have the following options available:
