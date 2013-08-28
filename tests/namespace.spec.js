@@ -73,7 +73,6 @@ describe('Namespace', function()
             });
 
             assert(ns.models['Test'] != undefined, "model is not defined.");
-            assert(ns.models['Test'].constructor.name == 'Model', "model is not an instance of Model.");
         });
 
         it('creates properties for model instances', function()
@@ -86,7 +85,6 @@ describe('Namespace', function()
             });
 
             assert(ns.Test != undefined, "property is not defined.");
-            assert(ns.Test.constructor.name == 'Model', "property not an instance of Model.");
         });
 
         it('returns the namespace instance', function()

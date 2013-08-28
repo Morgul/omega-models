@@ -13,7 +13,7 @@ module.exports = om.namespace('sample')
 	.define({
 		User: {
 			nick: fields.Char({ required: true }),
-			email: fields.Email(),
+			email: fields.Char({ validators: [ om.validators.isEmail ] }),
 			biography: fields.Text({ help: "A few words about who you are, and why we care." }),
 
 			first_name: fields.Char(),

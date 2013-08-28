@@ -36,7 +36,7 @@ Namespace.prototype.define = function(definitions)
             throw new Error("Model \"" + key + "\" already defined.")
         } // end if
 
-        self.models[key] = new Model(key, def);
+        self.models[key] = Model.create(key, this, def);
 
         // Define a property with this value on ourselves
         Object.defineProperty(self, key, {
