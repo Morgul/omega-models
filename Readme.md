@@ -4,12 +4,15 @@ An elegant ORM solution for node.js. Intended to be used with the omega web fram
 
 ## Status
 
-Currently, this is only just starting to be built. It currently doesn't function, but the implemented parts have unit
-tests. I expect in a short while I should have an initial implementation.
+Currently, this is only just being built. It isn't complete, but the implemented parts have unit tests.
+I expect in a short while I should have an initial implementation.
 
 If you want to see what using it will look like, check out 'sample.js' in the root of the project.
 
 ## Fields
+
+_Note_: Field names starting with `$` are not supported. While they will work in the most part, internally we use
+variables with those names on the instances. If you overwrite them, everything will explode horribly.
 
 All fields have the following options available:
 
@@ -45,3 +48,11 @@ All fields have the following options available:
     * `model` - A string that is the name of a defined model. This reference will only accept instances of that model.
     * `filter` - (Optional) An object, or function that filters the choices for this field to a subset of instances of the Model defined by `model`.
 * `fields.Text()` - A field that can store an unlimited amount of text.
+
+## Tests
+
+If you want to run the tests, please just run:
+
+```bash
+$ npm test
+```
