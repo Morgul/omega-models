@@ -6,6 +6,7 @@
 
 var om = require('../omega-models');
 var Model = require('../lib/model');
+var MockBackend = require('../lib/backends/mock');
 var fields = require('../lib/fields');
 var assert = require("assert");
 
@@ -31,6 +32,7 @@ describe('Model', function()
             thisObj: function(){ return this; }
         }
     });
+    ns.backend(new MockBackend());
 
     it('should be created by the namespace', function()
     {
@@ -177,6 +179,19 @@ describe('Model', function()
         test2.foo = "Baz!";
         assert(test.foo == "Bar!");
         assert(test2.foo == "Baz!");
+    });
+
+    describe('#save()', function()
+    {
+        it('calls the default backend with the model instance, and a list of prepared values', function()
+        {
+            var test = new ns.Test();
+            test.foo = "Bar!";
+
+            test.save();
+            assert.equal(test, ns._backend.last.modelInst);
+            assert.deepEqual({foo:test.foo}, ns._backend.last.prepared);
+        });
     });
 });
 

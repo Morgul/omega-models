@@ -39,7 +39,7 @@ describe('Fields', function()
         assert.equal(testInst.test, "Foo!");
     });
 
-    describe('#validate()', function()
+    describe('#prepare()', function()
     {
         it('throws an error if required, and not set.', function()
         {
@@ -49,7 +49,7 @@ describe('Fields', function()
 
             assert.throws(function()
             {
-                field.validate(undefined);
+                field.prepare(undefined);
             }, Error);
         });
 
@@ -61,7 +61,7 @@ describe('Fields', function()
 
             assert.doesNotThrow(function()
             {
-                field.validate("Foo!");
+                field.prepare("Foo!");
             });
         });
 
@@ -73,7 +73,7 @@ describe('Fields', function()
 
             assert.throws(function()
             {
-                field.validate(undefined);
+                field.prepare(undefined);
             }, Error);
         });
     });
