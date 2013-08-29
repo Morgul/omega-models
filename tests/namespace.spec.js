@@ -97,24 +97,10 @@ describe('Namespace', function()
 
     describe('#backend()', function()
     {
-        it('takes a backend module name', function()
+        it('takes a backend module', function()
         {
-            var ns = om.namespace('test');
+            var ns = om.namespace(new function Backend(){});
             assert.doesNotThrow(function(){ns.backend('mock');});
-        });
-
-        it('takes an optional config', function()
-        {
-            var ns = om.namespace('test');
-            assert.doesNotThrow(function(){ns.backend('mock', {});});
-        });
-
-        it('creates a Backend instance', function()
-        {
-            var ns = om.namespace('test');
-            ns.backend('mock');
-            assert(ns._backend != undefined, "backend is not defined.");
-            assert(ns._backend.constructor.name == 'Backend', "backend is not an instance of Backend.");
         });
 
         it('returns the namespace instance', function()

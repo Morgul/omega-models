@@ -9,7 +9,6 @@ var _ = require('lodash');
 var fields = require('./lib/fields');
 var validators = require('./lib/validators');
 var Model = require('./lib/model');
-var Backend = require('./lib/backend');
 
 var namespaces = {};
 
@@ -50,10 +49,9 @@ Namespace.prototype.define = function(definitions)
     return this;
 }; // end define
 
-Namespace.prototype.backend = function(name, config)
+Namespace.prototype.backend = function(backend)
 {
-    config = config || {};
-    this._backend = new Backend(name, config);
+    this._backend = backend;
 
     // Make chainable
     return this;
