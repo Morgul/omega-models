@@ -18,7 +18,7 @@ function Namespace(name)
 {
     this.name = name;
     this.models = {};
-    this._backend = undefined;
+    this.$backend = undefined;
 } // end Namespace
 
 Namespace.prototype.define = function(definitions)
@@ -51,7 +51,7 @@ Namespace.prototype.define = function(definitions)
 
 Namespace.prototype.backend = function(backend)
 {
-    this._backend = backend;
+    this.$backend = backend;
 
     // Make chainable
     return this;

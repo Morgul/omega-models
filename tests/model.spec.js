@@ -21,10 +21,10 @@ describe('Model', function()
         },
         TestProps: {
             foo: fields.Property(
-                    function(){ return this._props['foo'] || "Bar!"; },
-                    function(val){ this._props['foo'] = val; }
+                    function(){ return this.$scratch['foo'] || "Bar!"; },
+                    function(val){ this.$scratch['foo'] = val; }
                 ),
-            bar: fields.Property(function(){ return this._props['foo'] || "Bar!"; })
+            bar: fields.Property(function(){ return this.$scratch['foo'] || "Bar!"; })
         },
         TestFuncs: {
             foo: fields.Char(),
@@ -189,8 +189,8 @@ describe('Model', function()
             test.foo = "Bar!";
 
             test.save();
-            assert.equal(test, ns._backend.last.modelInst);
-            assert.deepEqual({foo:test.foo}, ns._backend.last.prepared);
+            assert.equal(test, ns.$backend.last.modelInst);
+            assert.deepEqual({foo:test.foo}, ns.$backend.last.prepared);
         });
     });
 });

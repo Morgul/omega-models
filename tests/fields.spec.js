@@ -22,7 +22,7 @@ describe('Fields', function()
 
     it('creates getters and setters', function()
     {
-        var constructor = function(){ this._values = {}; };
+        var constructor = function(){ this.$values = {}; };
         constructor.ns = {};
 
         var field = new Field();
