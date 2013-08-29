@@ -4,7 +4,7 @@
 // @module model.spec.js
 // ---------------------------------------------------------------------------------------------------------------------
 
-var om = require('../models');
+var om = require('../omega-models');
 var Model = require('../lib/model');
 var fields = require('../lib/fields');
 var assert = require("assert");
