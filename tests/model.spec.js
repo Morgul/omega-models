@@ -204,6 +204,19 @@ describe('Model', function()
             assert.deepEqual({foo:test.foo}, backend.last.prepared);
         });
     });
+
+    describe('#remove()', function()
+    {
+        it('calls the backend, passing the model instance', function()
+        {
+            var backend = new MockBackend();
+            var test = new ns.Test({}, backend);
+            test.foo = "Baz!";
+
+            test.remove();
+            assert.equal(test, backend.last.removed);
+        });
+    });
 });
 
 // ---------------------------------------------------------------------------------------------------------------------
