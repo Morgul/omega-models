@@ -183,7 +183,7 @@ describe('Model', function()
 
     describe('#save()', function()
     {
-        it('calls the default backend with the model instance, and a list of prepared values', function()
+        it('calls the default namespace backend with the model instance, and a list of prepared values', function()
         {
             var test = new ns.Test();
             test.foo = "Bar!";
@@ -191,6 +191,17 @@ describe('Model', function()
             test.save();
             assert.equal(test, ns.$backend.last.modelInst);
             assert.deepEqual({foo:test.foo}, ns.$backend.last.prepared);
+        });
+
+        it('calls the models\'s backend when instance created with one', function()
+        {
+            var backend = new MockBackend();
+            var test = new ns.Test({}, backend);
+            test.foo = "Baz!";
+
+            test.save();
+            assert.equal(test, backend.last.modelInst);
+            assert.deepEqual({foo:test.foo}, backend.last.prepared);
         });
     });
 });
