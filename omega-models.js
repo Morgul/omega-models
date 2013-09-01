@@ -9,6 +9,8 @@ var _ = require('lodash');
 var fields = require('./lib/fields');
 var validators = require('./lib/validators');
 var Model = require('./lib/model');
+var NoSQL = require('./lib/backends/nosql');
+var Mock = require('./lib/backends/mock');
 
 var namespaces = {};
 
@@ -78,7 +80,11 @@ function namespace(name)
 module.exports = {
     namespace: namespace,
     fields: fields,
-    validators: validators
+    validators: validators,
+    backends: {
+        NoSQL: NoSQL,
+        Mock: Mock
+    }
 }; // end exports
 
 //----------------------------------------------------------------------------------------------------------------------
