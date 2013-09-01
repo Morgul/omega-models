@@ -17,7 +17,7 @@ describe('Model', function()
     var ns = om.namespace('model-test');
     ns.define({
         Test: {
-            foo: fields.Char()
+            foo: fields.String()
         },
         TestProps: {
             foo: fields.Property(
@@ -27,7 +27,7 @@ describe('Model', function()
             bar: fields.Property(function(){ return this.$scratch['foo'] || "Bar!"; })
         },
         TestFuncs: {
-            foo: fields.Char(),
+            foo: fields.String(),
             bar: function(){ return this.foo; },
             thisObj: function(){ return this; }
         }

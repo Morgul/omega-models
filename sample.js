@@ -12,13 +12,13 @@ var fields = om.fields;
 module.exports = om.namespace('sample')
 	.define({
 		User: {
-			nick: fields.Char({ required: true }),
-			email: fields.Char({ validators: [ om.validators.isEmail ] }),
-			biography: fields.Text({ help: "A few words about who you are, and why we care." }),
+			nick: fields.String({ required: true }),
+			email: fields.String({ validators: [ om.validators.isEmail ] }),
+			biography: fields.String({ help: "A few words about who you are, and why we care." }),
 
-			first_name: fields.Char(),
-			middle_name: fields.Char(),
-			last_name: fields.Char(),
+			first_name: fields.String(),
+			middle_name: fields.String(),
+			last_name: fields.String(),
 			age: fields.Integer({ min: 13, max: 45 }),
 			gender: fields.Choice({ choices: ["Male", "Female", "Other"] }),
 
@@ -46,7 +46,7 @@ module.exports = om.namespace('sample')
 		},
 
 		Group: {
-			name: fields.Char({ required: true }),
+			name: fields.String({ required: true }),
 			active: fields.Boolean({ default: true }),
 			users: fields.List({ type: fields.Reference({ model: 'User' }) }),
 
@@ -55,7 +55,7 @@ module.exports = om.namespace('sample')
 		},
 
 		SomethingElse: {
-			name: fields.Char({ required: true }),
+			name: fields.String({ required: true }),
 			group: fields.Reference({ model: 'Group', filter: { active: true } })
 		}
 	})

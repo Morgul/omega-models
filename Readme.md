@@ -27,8 +27,8 @@ All fields have the following options available:
     * `start` - (Optional) The starting value for ids. Defaults to 1.
 * `fields.Binary()` - A field to store raw binary data.
 * `fields.Boolean()` - A field to store boolean values
-* `fields.Char()` - A field to store a limited number of characters. (A maximum limit is not required, but many databases will impose one.)
-    * `max_length` - (Optional) The maximum number of chars that can be stored in this field. (If not specified, SQL backends should default to the maximum length for a char field.)
+* `fields.String()` - A field to store text as a string. A maximum limit is not required, but if one is specified, SQL backends will store this in a smaller, more efficient data type.
+    * `max_length` - (Optional) The maximum number of chars that can be stored in this field. (If not specified, SQL backends should default to a Text field, or whatever the unlimited text storage type is.)
 * `fields.Choice()` - A field that limits possible inputs to a specified list of possible values.
     * `choices` - A list of valid choices.
     * `type` - (Optional) a field type instance, defining the underlying field the choice is stored as. Defaults to `Char`.
@@ -47,7 +47,6 @@ All fields have the following options available:
 * `fields.Reference()` - A field that refers to another instance of a model.
     * `model` - A string that is the name of a defined model. This reference will only accept instances of that model.
     * `filter` - (Optional) An object, or function that filters the choices for this field to a subset of instances of the Model defined by `model`.
-* `fields.Text()` - A field that can store an unlimited amount of text.
 
 ## Tests
 
