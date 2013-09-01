@@ -217,6 +217,122 @@ describe('Model', function()
             assert.equal(test, backend.last.removed);
         });
     });
+
+    describe('#distinct()', function()
+    {
+        it('calls the backend with the query and callback', function(done)
+        {
+            ns.Test.distinct({foo: 'Bar!'}, function()
+            {
+                assert.deepEqual(ns.$backend.last.distinct.query, {foo: 'Bar!'});
+                done();
+            });
+        });
+    });
+
+    describe('#find()', function()
+    {
+        it('calls the backend with the query and callback', function(done)
+        {
+            ns.Test.find({foo: 'Bar!'}, function()
+            {
+                assert.deepEqual(ns.$backend.last.find.query, {foo: 'Bar!'});
+                done();
+            });
+        });
+
+        it('supports passing a single argument as id', function(done)
+        {
+            ns.Test.find("some_id", function()
+            {
+                assert.deepEqual(ns.$backend.last.find.query, {id: "some_id"});
+                done();
+            });
+        });
+    });
+
+    describe('#findOne()', function()
+    {
+        it('calls the backend with the query and callback', function(done)
+        {
+            ns.Test.findOne({foo: 'Bar!'}, function()
+            {
+                assert.deepEqual(ns.$backend.last.findOne.query, {foo: 'Bar!'});
+                done();
+            });
+        });
+
+        it('supports passing a single argument as id', function(done)
+        {
+            ns.Test.findOne("some_id", function()
+            {
+                assert.deepEqual(ns.$backend.last.findOne.query, {id: "some_id"});
+                done();
+            });
+        });
+    });
+
+    describe('#findOneAndUpdate()', function()
+    {
+        it('calls the backend with the query, the update and callback', function(done)
+        {
+            ns.Test.findOneAndUpdate({foo: 'Bar!'}, {foo: 'Baz!'}, function()
+            {
+                assert.deepEqual(ns.$backend.last.findOneAndUpdate.query, {foo: 'Bar!'});
+                assert.deepEqual(ns.$backend.last.findOneAndUpdate.update, {foo: 'Baz!'});
+                done();
+            });
+        });
+
+        it('supports passing a single argument as id', function(done)
+        {
+            ns.Test.findOneAndUpdate("some_id", {foo: 'Baz!'}, function()
+            {
+                assert.deepEqual(ns.$backend.last.findOneAndUpdate.query, {id: "some_id"});
+                assert.deepEqual(ns.$backend.last.findOneAndUpdate.update, {foo: 'Baz!'});
+                done();
+            });
+        });
+    });
+
+    describe('#update()', function()
+    {
+        it('calls the backend with the query, the update and callback', function(done)
+        {
+            ns.Test.update({foo: 'Bar!'}, {foo: 'Baz!'}, function()
+            {
+                assert.deepEqual(ns.$backend.last.update.query, {foo: 'Bar!'});
+                assert.deepEqual(ns.$backend.last.update.update, {foo: 'Baz!'});
+                done();
+            });
+        });
+
+        it('supports passing a single argument as id', function(done)
+        {
+            ns.Test.update("some_id", {foo: 'Baz!'}, function()
+            {
+                assert.deepEqual(ns.$backend.last.update.query, {id: "some_id"});
+                assert.deepEqual(ns.$backend.last.update.update, {foo: 'Baz!'});
+                done();
+            });
+        });
+    });
+
+    describe('#mapReduce()', function()
+    {
+        it('calls the backend with the map, the reduce and callback', function(done)
+        {
+            function map(){}
+            function reduce(){}
+
+            ns.Test.mapReduce(map, reduce, function()
+            {
+                assert.deepEqual(ns.$backend.last.mapReduce.map, map);
+                assert.deepEqual(ns.$backend.last.mapReduce.reduce, reduce);
+                done();
+            });
+        });
+    });
 });
 
 // ---------------------------------------------------------------------------------------------------------------------
