@@ -19,6 +19,11 @@ describe('Model', function()
         Test: {
             foo: fields.String()
         },
+        TestKey: {
+            name: fields.String({ key: true }),
+            alt: fields.String({ key: true }),
+            foo: fields.String()
+        },
         TestProps: {
             foo: fields.Property(
                     function(){ return this.$scratch['foo'] || "Bar!"; },
@@ -67,6 +72,12 @@ describe('Model', function()
         var test = new ns.Test({ foo: "Bar!", baz: "Foo!" });
         assert.equal(test.foo, "Bar!");
         assert.equal(test.baz, undefined, "Non-field property defined from initial dict");
+    });
+
+    it('has a $key property that represents the primary key for the model', function()
+    {
+        var test = new ns.TestKey({ foo: "Bar!", name: "Test", alt: "More Test!" });
+        assert.deepEqual(test.$key, { name: "Test", alt: "More Test!" });
     });
 
     it('should allow properties to be defined', function()
