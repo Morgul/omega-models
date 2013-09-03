@@ -21,7 +21,7 @@ describe('Validators', function()
 
         it('should return false for an invalid email', function()
         {
-            assert(validators.isEmail("foobar") == false, "Returned true for an invalid email.");
+            assert(validators.isEmail("foobar") === false, "Returned true for an invalid email.");
         });
     });
 
@@ -34,7 +34,7 @@ describe('Validators', function()
 
         it('should return false for an invalid ipv4 address', function()
         {
-            assert(validators.isIPv4("999.999.999.999") == false, "Returned true for an invalid ipv4 address.");
+            assert(validators.isIPv4("999.999.999.999") === false, "Returned true for an invalid ipv4 address.");
         });
     });
 });
