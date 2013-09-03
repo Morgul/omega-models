@@ -4,7 +4,7 @@
 // @module sample.js
 //----------------------------------------------------------------------------------------------------------------------
 
-var om = require('omega-models');
+var om = require('../omega-models');
 var fields = om.fields;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -58,7 +58,6 @@ module.exports = om.namespace('sample')
 			name: fields.String({ required: true }),
 			group: fields.Reference({ model: 'Group', filter: { active: true } })
 		}
-	})
-	.backend('nosql', { baseDir: './db' });
+	});
 
 //----------------------------------------------------------------------------------------------------------------------
