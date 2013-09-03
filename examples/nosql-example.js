@@ -64,7 +64,7 @@ var admin = new ns.User({
     gender: "Female"
 });
 
-admin.save(function()
+admin.save(function(count)
 {
     console.log('Admin User representation: %j', admin);
 
@@ -80,6 +80,8 @@ admin.save(function()
 
     foo.save(function()
     {
+        console.log('Saving foo user...');
+
         var bar = new ns.User({
             nick: "bar",
             email: "bar@example.com",
@@ -91,6 +93,7 @@ admin.save(function()
 
         bar.save(function()
         {
+            console.log('Saving bar user...');
             queryTest();
         });
     });

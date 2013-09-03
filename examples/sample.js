@@ -12,7 +12,7 @@ var fields = om.fields;
 module.exports = om.namespace('sample')
 	.define({
 		User: {
-			nick: fields.String({ required: true }),
+			nick: fields.String({ required: true, key: true }),
 			email: fields.String({ validators: [ om.validators.isEmail ] }),
 			biography: fields.String({ help: "A few words about who you are, and why we care." }),
 
