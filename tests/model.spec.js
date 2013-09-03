@@ -217,8 +217,13 @@ describe('Model', function()
             test.foo = "Bar!";
 
             test.save();
-            assert.equal(test, ns.$backend.last.modelInst);
-            assert.deepEqual({foo:test.foo}, ns.$backend.last.prepared);
+
+            assert.deepEqual(ns.$backend.last, {
+                store: {
+                    modelInst: test,
+                    prepared: {foo: test.foo}
+                }
+            });
         });
 
         it('calls the models\'s backend when instance created with one', function()
@@ -228,8 +233,13 @@ describe('Model', function()
             test.foo = "Baz!";
 
             test.save();
-            assert.equal(test, backend.last.modelInst);
-            assert.deepEqual({foo:test.foo}, backend.last.prepared);
+
+            assert.deepEqual(backend.last, {
+                store: {
+                    modelInst: test,
+                    prepared: {foo: test.foo}
+                }
+            });
         });
     });
 
@@ -242,29 +252,27 @@ describe('Model', function()
             test.foo = "Baz!";
 
             test.remove();
-            assert.equal(test, backend.last.removed);
-        });
-    });
 
-    describe('#distinct()', function()
-    {
-        it('calls the backend with the query and callback', function(done)
-        {
-            ns.Test.distinct({foo: 'Bar!'}, function()
-            {
-                assert.deepEqual(ns.$backend.last.distinct.query, {foo: 'Bar!'});
-                done();
+            assert.deepEqual(backend.last, {
+                remove: {
+                    modelInst: test
+                }
             });
         });
     });
 
     describe('#find()', function()
     {
-        it('calls the backend with the query and callback', function(done)
+        it('calls the backend with the filter and callback', function(done)
         {
             ns.Test.find({foo: 'Bar!'}, function()
             {
-                assert.deepEqual(ns.$backend.last.find.query, {foo: 'Bar!'});
+                assert.deepEqual(ns.$backend.last, {
+                    find: {
+                        filter: {foo: 'Bar!'}
+                    }
+                });
+
                 done();
             });
         });
@@ -273,7 +281,12 @@ describe('Model', function()
         {
             ns.Test.find("some_id", function()
             {
-                assert.deepEqual(ns.$backend.last.find.query, {id: "some_id"});
+                assert.deepEqual(ns.$backend.last, {
+                    find: {
+                        filter: {id: "some_id"}
+                    }
+                });
+
                 done();
             });
         });
@@ -281,11 +294,16 @@ describe('Model', function()
 
     describe('#findOne()', function()
     {
-        it('calls the backend with the query and callback', function(done)
+        it('calls the backend with the filter and callback', function(done)
         {
             ns.Test.findOne({foo: 'Bar!'}, function()
             {
-                assert.deepEqual(ns.$backend.last.findOne.query, {foo: 'Bar!'});
+                assert.deepEqual(ns.$backend.last, {
+                    findOne: {
+                        filter: {foo: 'Bar!'}
+                    }
+                });
+
                 done();
             });
         });
@@ -294,7 +312,12 @@ describe('Model', function()
         {
             ns.Test.findOne("some_id", function()
             {
-                assert.deepEqual(ns.$backend.last.findOne.query, {id: "some_id"});
+                assert.deepEqual(ns.$backend.last, {
+                    findOne: {
+                        filter: {id: "some_id"}
+                    }
+                });
+
                 done();
             });
         });
@@ -302,12 +325,17 @@ describe('Model', function()
 
     describe('#findOneAndUpdate()', function()
     {
-        it('calls the backend with the query, the update and callback', function(done)
+        it('calls the backend with the filter, the update and callback', function(done)
         {
             ns.Test.findOneAndUpdate({foo: 'Bar!'}, {foo: 'Baz!'}, function()
             {
-                assert.deepEqual(ns.$backend.last.findOneAndUpdate.query, {foo: 'Bar!'});
-                assert.deepEqual(ns.$backend.last.findOneAndUpdate.update, {foo: 'Baz!'});
+                assert.deepEqual(ns.$backend.last, {
+                    findOneAndUpdate: {
+                        filter: {foo: 'Bar!'},
+                        update: {foo: 'Baz!'}
+                    }
+                });
+
                 done();
             });
         });
@@ -316,8 +344,13 @@ describe('Model', function()
         {
             ns.Test.findOneAndUpdate("some_id", {foo: 'Baz!'}, function()
             {
-                assert.deepEqual(ns.$backend.last.findOneAndUpdate.query, {id: "some_id"});
-                assert.deepEqual(ns.$backend.last.findOneAndUpdate.update, {foo: 'Baz!'});
+                assert.deepEqual(ns.$backend.last, {
+                    findOneAndUpdate: {
+                        filter: {id: "some_id"},
+                        update: {foo: 'Baz!'}
+                    }
+                });
+
                 done();
             });
         });
@@ -325,12 +358,17 @@ describe('Model', function()
 
     describe('#update()', function()
     {
-        it('calls the backend with the query, the update and callback', function(done)
+        it('calls the backend with the filter, the update and callback', function(done)
         {
             ns.Test.update({foo: 'Bar!'}, {foo: 'Baz!'}, function()
             {
-                assert.deepEqual(ns.$backend.last.update.query, {foo: 'Bar!'});
-                assert.deepEqual(ns.$backend.last.update.update, {foo: 'Baz!'});
+                assert.deepEqual(ns.$backend.last, {
+                    update: {
+                        filter: {foo: 'Bar!'},
+                        update: {foo: 'Baz!'}
+                    }
+                });
+
                 done();
             });
         });
@@ -339,8 +377,13 @@ describe('Model', function()
         {
             ns.Test.update("some_id", {foo: 'Baz!'}, function()
             {
-                assert.deepEqual(ns.$backend.last.update.query, {id: "some_id"});
-                assert.deepEqual(ns.$backend.last.update.update, {foo: 'Baz!'});
+                assert.deepEqual(ns.$backend.last, {
+                    update: {
+                        filter: {id: "some_id"},
+                        update: {foo: 'Baz!'}
+                    }
+                });
+
                 done();
             });
         });
@@ -355,8 +398,13 @@ describe('Model', function()
 
             ns.Test.mapReduce(map, reduce, function()
             {
-                assert.deepEqual(ns.$backend.last.mapReduce.map, map);
-                assert.deepEqual(ns.$backend.last.mapReduce.reduce, reduce);
+                assert.deepEqual(ns.$backend.last, {
+                    mapReduce: {
+                        map: map,
+                        reduce: reduce
+                    }
+                });
+
                 done();
             });
         });
