@@ -30,15 +30,28 @@ function queryTest()
         ns.User.find({gender: "Female"}, function(error, women)
         {
             console.log("Female users:", women);
+
+            ns.User.findOneAndUpdate({first_name: 'Foo'}, {age: 15}, function(error, foo)
+            {
+                console.log('Updated Foo user: %j', foo);
+
+                ns.User.update({first_name: 'Bar'}, {middle_name: 'Baz'}, function(error)
+                {
+                    // Find a user, do some things with it, modify the model directly, and then save it back to the db.
+                    ns.User.findOne({first_name: 'Bar'}, function(error, bar)
+                    {
+                        console.log('Updated Bar user: %j', bar);
+
+                        bar.biography = "This is Bar Foo, the younger sister of the infamous Foo Bar. She has lived in his shadow for a long, long time. Now, finally, she can get her own entry in a database."
+                        bar.save(function()
+                        {
+                            console.log('Finished NoSQL Example.');
+                        });
+                    });
+                });
+            })
         })
     });
-
-
-    // Find and update a user
-
-    // Update a user
-
-    // Find a user, do some things with it, modify the model directly, and then save it back to the db.
 } // end queryTest
 
 // Create a new User.
@@ -82,7 +95,5 @@ admin.save(function()
         });
     });
 });
-
-console.log('Finished NoSQL Example.');
 
 //----------------------------------------------------------------------------------------------------------------------
