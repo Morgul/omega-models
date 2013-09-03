@@ -4,6 +4,8 @@ An elegant ORM solution for node.js. Intended to be used with the omega web fram
 
 ## Status
 
+[![Build Status](https://travis-ci.org/Morgul/omega-models.png)](https://travis-ci.org/Morgul/omega-models])
+
 Currently, this is only just being built. It isn't complete, but the implemented parts have unit tests.
 I expect in a short while I should have an initial implementation.
 
