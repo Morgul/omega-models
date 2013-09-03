@@ -26,10 +26,10 @@ describe('Model', function()
         },
         TestProps: {
             foo: fields.Property(
-                    function(){ return this.$scratch['foo'] || "Bar!"; },
-                    function(val){ this.$scratch['foo'] = val; }
+                    function() { return this.$scratch.foo || "Bar!"; },
+                    function(val) { this.$scratch.foo = val; }
                 ),
-            bar: fields.Property(function(){ return this.$scratch['foo'] || "Bar!"; })
+            bar: fields.Property(function() { return this.$scratch.foo || "Bar!"; })
         },
         TestProps2: {
             first_name: fields.String(),
@@ -50,13 +50,13 @@ describe('Model', function()
 
     it('should be created by the namespace', function()
     {
-        assert(ns.Test != undefined, "property is not defined.");
+        assert(ns.Test !== undefined, "property is not defined.");
     });
 
     it('should be instantiable', function()
     {
         var test = new ns.Test();
-        assert(test != undefined);
+        assert(test !== undefined);
     });
 
     it('instances should be frozen', function()
@@ -98,10 +98,10 @@ describe('Model', function()
             }
         });
 
-        assert(ns.Test != undefined, "Test undefined.");
+        assert(ns.Test !== undefined, "Test undefined.");
 
         var test = new ns.Test();
-        assert(test.foo != undefined, "property is undefined.");
+        assert(test.foo !== undefined, "property is undefined.");
         assert(test.foo == "Bar!", "property is incorrect.");
     });
 
@@ -114,17 +114,17 @@ describe('Model', function()
             }
         });
 
-        assert(ns.Test != undefined, "Test undefined.");
+        assert(ns.Test !== undefined, "Test undefined.");
 
         var test = new ns.Test();
-        assert(test.foo() != undefined, "function is undefined.");
+        assert(test.foo() !== undefined, "function is undefined.");
         assert(test.foo() == "Bar!", "function is incorrect.");
     });
 
     it('should allow fields to be set', function()
     {
         var test = new ns.Test({ foo: "Bar!" });
-        assert(test != undefined);
+        assert(test !== undefined);
         assert(test.foo = "Bar!");
     });
 
