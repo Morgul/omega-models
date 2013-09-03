@@ -6,6 +6,7 @@
 
 var om = require('../omega-models');
 var fields = require('../lib/fields');
+var MockBackend = require('../lib/backends/mock');
 var assert = require("assert");
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -99,14 +100,14 @@ describe('Namespace', function()
     {
         it('takes a backend module', function()
         {
-            var ns = om.namespace(new function Backend(){});
-            assert.doesNotThrow(function(){ns.backend('mock');});
+            var ns = om.namespace('test-backend');
+            assert.doesNotThrow(function(){ns.backend(new MockBackend());});
         });
 
         it('returns the namespace instance', function()
         {
             var ns = om.namespace('test');
-            var ns1 = ns.backend('mock');
+            var ns1 = ns.backend(new MockBackend());
             assert(ns === ns1);
         });
     });
