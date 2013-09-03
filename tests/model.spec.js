@@ -31,6 +31,15 @@ describe('Model', function()
                 ),
             bar: fields.Property(function(){ return this.$scratch['foo'] || "Bar!"; })
         },
+        TestProps2: {
+            first_name: fields.String(),
+            last_name: fields.String(),
+            full_name: fields.Property(function()
+            {
+                return this.first_name + " " + this.last_name;
+            })
+
+        },
         TestFuncs: {
             foo: fields.String(),
             bar: function(){ return this.foo; },
@@ -169,6 +178,14 @@ describe('Model', function()
         var test = new ns.Test({ foo: "Bar!" });
         var testString = JSON.stringify(test);
         assert.equal(testString, "{\"foo\":\"Bar!\"}", "Model instance did not produce the correct json.");
+    });
+
+    it('should include properties in json', function()
+    {
+
+        var test = new ns.TestProps2({ first_name: "Foo", last_name: "Bar" });
+        var testString = JSON.stringify(test);
+        assert.equal(testString, "{\"first_name\":\"Foo\",\"last_name\":\"Bar\",\"full_name\":\"Foo Bar\"}", "Model instance did not produce the correct json.");
     });
 
     it('should not include functions when stringified as json', function()
