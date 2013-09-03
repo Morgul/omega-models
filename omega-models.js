@@ -34,7 +34,7 @@ Namespace.prototype.define = function(definitions)
         // invalid state.
         if(key in self.models)
         {
-            throw new Error("Model \"" + key + "\" already defined.")
+            throw new Error("Model \"" + key + "\" already defined.");
         } // end if
 
         self.models[key] = Model.create(key, self, def);
