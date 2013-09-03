@@ -19,33 +19,70 @@ console.log('Starting NoSQL Example...');
 var backend = new NoSQLBackend({ baseDir: './db' });
 ns.backend(backend);
 
+function queryTest()
+{
+    // Find a user by name
+    ns.User.findOne({first_name: 'Foo'}, function(error, foo)
+    {
+        console.log("Foo user: %j", foo);
+
+        // Find all female users
+        ns.User.find({gender: "Female"}, function(error, women)
+        {
+            console.log("Female users:", women);
+        })
+    });
+
+
+    // Find and update a user
+
+    // Update a user
+
+    // Find a user, do some things with it, modify the model directly, and then save it back to the db.
+} // end queryTest
+
 // Create a new User.
 var admin = new ns.User({
     nick: "admin",
     email: "admin@example.com",
     first_name: "Admin",
     last_name: "User",
-    age: 45,
+    age: 30,
     gender: "Female"
 });
 
-console.log('Admin User representation: %j', admin);
-
-// Create a few more users
-
-// Find a user by name
-
-// Find all female users
-
-// Find and update a user
-
-// Update a user
-
-// Find a user, do some things with it, modify the model directly, and then save it back to the db.
-
 admin.save(function()
 {
-    console.log('Finished NoSQL Example.');
+    console.log('Admin User representation: %j', admin);
+
+    // Create a few more users
+    var foo = new ns.User({
+        nick: "foo",
+        email: "foo@example.com",
+        first_name: "Foo",
+        last_name: "Bar",
+        age: 13,
+        gender: "Male"
+    });
+
+    foo.save(function()
+    {
+        var bar = new ns.User({
+            nick: "bar",
+            email: "bar@example.com",
+            first_name: "Bar",
+            last_name: "Foo",
+            age: 18,
+            gender: "Female"
+        });
+
+        bar.save(function()
+        {
+            queryTest();
+        });
+    });
 });
+
+console.log('Finished NoSQL Example.');
 
 //----------------------------------------------------------------------------------------------------------------------
