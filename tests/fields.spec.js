@@ -6,6 +6,8 @@
 
 var assert = require("assert");
 
+var om = require('../omega-models');
+var Model = require('../lib/model');
 var fields = require('../lib/fields');
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -231,6 +233,24 @@ describe('Fields', function()
                 intField.prepare("eleven!");
             },
             Error);
+        });
+    });
+
+    describe('ReferenceField', function()
+    {
+        it('store a Model instance as it\'s `$key`', function()
+        {
+            var refField = fields.Reference();
+            refField.setup('test', {});
+
+            var ns = om.namespace('test-fields').define({
+                Test: {
+                    foo: fields.String({ key: true })
+                }
+            });
+
+            var test = new ns.Test({ foo: "Bar!" });
+            assert.deepEqual(refField.prepare(test), {foo: "Bar!"});
         });
     });
 
