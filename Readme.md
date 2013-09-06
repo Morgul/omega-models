@@ -1,15 +1,28 @@
 # Omega Models
 
-An elegant ORM solution for node.js. Intended to be used with the omega web framework, but not required.
+An elegant ORM solution for node.js. Intended to be used with the omega web framework, but **not required**. Supports
+mulitple backends for storage, including [nosql](https://github.com/petersirka/nosql), [mongoDB](http://www.mongodb.org/),
+[riak](http://basho.com/riak/), [redis](http://redis.io/), as well as [SQLite](http://www.sqlite.org/) and
+[PostgreSQL](http://www.postgresql.org/). (It even includes a mock backend for unit tests.)
+
+These backends are provided by separate projects (except for `nosql`, which is included.)
 
 ## Status
 
 [![Build Status](https://travis-ci.org/Morgul/omega-models.png)](https://travis-ci.org/Morgul/omega-models])
 
-Currently, this is only just being built. It isn't complete, but the implemented parts have unit tests.
-I expect in a short while I should have an initial implementation.
+I would consider this library 'alpha' quality. I still don't have all of the features I would like, but most of the
+required ones are there. You _can_ use it, and with the built-in `nosql` backend, it will work as expected. I'm lacking
+a lot of documentation, and while a lot of the system is unit tested, it needs some real-world testing. If you're feeling
+adventurous, go for it. Otherwise, hold off until it's got a few more versions under it's belt.
 
-If you want to see what using it will look like, check out 'sample.js' in the root of the project.
+## Backends
+
+Currently, the only backends that exist are the two built into Omega Models itself. Those are:
+* `nosql` - A flat-file backed database that should be good for development, or light-weight use. (Considered on par with sqlite.)
+* `mock` - A mocked backend, used for unit tests.
+
+See [here](https://github.com/Morgul/omega-models/blob/master/omega-models.js#L80) for how they're exposed.
 
 ## Fields
 
@@ -25,7 +38,8 @@ All fields have the following options available:
 
 ### Field Types
 
-* `fields.Auto()` - An `Integer` field that automatically increments according to available IDs.
+* `fields.AutoID()` - A field that represents an automatically assigned id. (This is dependant on the backend.)
+* `fields.AutoInc()` - An `Integer` field that automatically increments, based on a starting value.
     * `start` - (Optional) The starting value for ids. Defaults to 1.
 * `fields.Binary()` - A field to store raw binary data.
 * `fields.Boolean()` - A field to store boolean values

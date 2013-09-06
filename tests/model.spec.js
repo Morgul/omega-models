@@ -211,34 +211,40 @@ describe('Model', function()
 
     describe('#save()', function()
     {
-        it('calls the default namespace backend with the model instance, and a list of prepared values', function()
+        it('calls the default namespace backend with the model instance, and a list of prepared values', function(done)
         {
             var test = new ns.Test();
             test.foo = "Bar!";
 
-            test.save();
-
-            assert.deepEqual(ns.$backend.last, {
-                store: {
-                    modelInst: test,
-                    prepared: {foo: test.foo}
-                }
+            test.save(function(error)
+            {
+                assert.equal(error, undefined, "Encountered error while saving: " + (error || "").toString());
+                assert.deepEqual(ns.$backend.last, {
+                    store: {
+                        modelInst: test,
+                        prepared: {foo: test.foo}
+                    }
+                });
+                done();
             });
         });
 
-        it('calls the models\'s backend when instance created with one', function()
+        it('calls the models\'s backend when instance created with one', function(done)
         {
             var backend = new MockBackend();
             var test = new ns.Test({}, backend);
             test.foo = "Baz!";
 
-            test.save();
-
-            assert.deepEqual(backend.last, {
-                store: {
-                    modelInst: test,
-                    prepared: {foo: test.foo}
-                }
+            test.save(function(error)
+            {
+                assert.equal(error, undefined, "Encountered error while saving: " + (error || "").toString());
+                assert.deepEqual(backend.last, {
+                    store: {
+                        modelInst: test,
+                        prepared: {foo: test.foo}
+                    }
+                });
+                done();
             });
         });
     });
