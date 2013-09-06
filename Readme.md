@@ -16,6 +16,15 @@ required ones are there. You _can_ use it, and with the built-in `nosql` backend
 a lot of documentation, and while a lot of the system is unit tested, it needs some real-world testing. If you're feeling
 adventurous, go for it. Otherwise, hold off until it's got a few more versions under it's belt.
 
+### Missing Features
+
+These are the big ticket items still missing:
+
+* Automatic IDs - If you don't specify `key: true` in any field, then we should create an AutoID field called `id` for you.
+* `AutoID` field - Currently, this is nebulous; I think we can get away without having special logic in omega models proper; but the backends will need to implement this.
+* `AutoInc` field - No logic in omega-models for this, currently. Not sure if the logic belongs here, or in the backend.
+* `Reference` field - Currently just stores whatever you shove in it. Needs to support storing `$key` instead.
+
 ## Backends
 
 Currently, the only backends that exist are the two built into Omega Models itself. Those are:
