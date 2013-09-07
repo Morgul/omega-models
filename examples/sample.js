@@ -46,7 +46,7 @@ module.exports = om.namespace('sample')
 		},
 
 		Group: {
-			name: fields.String({ required: true }),
+			name: fields.String({ required: true, key: true }),
 			active: fields.Boolean({ default: true }),
 			users: fields.List({ type: fields.Reference({ model: 'User' }) }),
 
@@ -55,7 +55,7 @@ module.exports = om.namespace('sample')
 		},
 
 		SomethingElse: {
-			name: fields.String({ required: true }),
+			name: fields.String({ required: true, key: true }),
 			group: fields.Reference({ model: 'Group', filter: { active: true } })
 		}
 	});
