@@ -156,6 +156,28 @@ describe('Fields', function()
             },
             Error);
         });
+
+        it('throws an error if `type` specified, but not a Field', function()
+        {
+            var choiceField = fields.Choice({ choices: ['foo', 'bar'], type: {} });
+            choiceField.setup('test', {});
+            assert.throws(function()
+                {
+                    choiceField.prepare("bar");
+                },
+                Error);
+        });
+
+        it('throws an error if `type` specified, but value does not validate', function()
+        {
+            var choiceField = fields.Choice({ choices: [3, 4], type: fields.Integer({ max:3 }) });
+            choiceField.setup('test', {});
+            assert.throws(function()
+                {
+                    choiceField.prepare(4);
+                },
+                Error);
+        });
     });
 
     describe('FloatField', function()
@@ -231,6 +253,42 @@ describe('Fields', function()
             assert.throws(function()
             {
                 intField.prepare("eleven!");
+            },
+            Error);
+        });
+    });
+
+    describe('ListField', function()
+    {
+        it('throws an error if value is not an array', function()
+        {
+            var listField = fields.List();
+            listField.setup('test', {});
+            assert.throws(function()
+            {
+                listField.prepare("not_a_list");
+            },
+            Error);
+        });
+
+        it('throws an error if `type` specified, but not a Field', function()
+        {
+            var listField = fields.List({ type: {} });
+            listField.setup('test', {});
+            assert.throws(function()
+            {
+                listField.prepare([1, 2, 3]);
+            },
+            Error);
+        });
+
+        it('throws an error if `type` specified, but value does not validate', function()
+        {
+            var listField = fields.List({ lists: [3, 4], type: fields.Integer({ max:3 }) });
+            listField.setup('test', {});
+            assert.throws(function()
+            {
+                listField.prepare([1, 2, 3, "cat"]);
             },
             Error);
         });

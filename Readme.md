@@ -66,7 +66,7 @@ All fields have the following options available:
     * `min` - (Optional) The minimum possible value to be stored.
     * `max` - (Optional) The minimum possible value to be stored.
 * `fields.List()` - A field to store a list of items of one of the other field types. (How this is achieved depends on the backend.)
-    * `type` - A field type instance, representing the types that will be stored in this list.
+    * `type` - (Optional) A field type instance, representing the types that will be stored in this list. (Danger: Some backends may not support mixed types.)
 * `fields.Reference()` - A field that refers to another instance of a model.
     * `model` - A string that is the name of a defined model. This reference will only accept instances of that model.
     * `filter` - (Optional) An object, or function that filters the choices for this field to a subset of instances of the Model defined by `model`.
