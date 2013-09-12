@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "An elegant ORM solution for node.js. Intended to be used with the omega web framework, but not required.",
   "main": "omega-models.js",
+  "repository": "https://github.com/Morgul/omega-models",
   "scripts": {
     "test": "./node_modules/.bin/mocha tests --reporter spec"
   },
