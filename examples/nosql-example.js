@@ -6,6 +6,7 @@
 
 var om = require('../omega-models');
 var NoSQLBackend = om.backends.NoSQL;
+//var NEDBBackend = om.backends.NEDB;
 
 // If you check the sample.js, we simply export the namespace object returned by `om.namespace`. This means that we can
 // simply use the return of the require.
@@ -17,6 +18,7 @@ console.log('Starting NoSQL Example...');
 
 // Set the backend to a new instance of the NoSQL backend.
 var backend = new NoSQLBackend({ baseDir: './db' });
+//var backend = new NEDBBackend({ baseDir: './db' });
 ns.backend(backend);
 
 var something = new ns.SomethingElse({
