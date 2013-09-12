@@ -54,6 +54,11 @@ module.exports = om.namespace('sample')
 			altusers: fields.RefList({ model: 'User' })
 		},
 
+        Something: {
+            name: fields.String({ required: true }),
+            numbers: fields.List({ type: fields.Integer() })
+        },
+
 		SomethingElse: {
 			name: fields.String({ required: true, key: true }),
 			group: fields.Reference({ model: 'Group', filter: { active: true } })

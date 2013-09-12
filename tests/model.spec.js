@@ -24,6 +24,9 @@ describe('Model', function()
             alt: fields.String({ key: true }),
             foo: fields.String()
         },
+        TestAutoKey: {
+            name: fields.String()
+        },
         TestProps: {
             foo: fields.Property(
                     function() { return this.$scratch.foo || "Bar!"; },
@@ -87,6 +90,16 @@ describe('Model', function()
     {
         var test = new ns.TestKey({ foo: "Bar!", name: "Test", alt: "More Test!" });
         assert.deepEqual(test.$key, { name: "Test", alt: "More Test!" });
+    });
+
+    it('should automatically add a $id field if not fields are marked as `key:true`', function(done)
+    {
+        var test = new ns.TestAutoKey({ name: "Test" });
+        test.save(function(error)
+        {
+            assert.equal(test.$id, "some_key");
+            done();
+        });
     });
 
     it('should allow properties to be defined', function()

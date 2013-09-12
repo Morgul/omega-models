@@ -17,81 +17,18 @@ console.log('Starting NEDB Example...');
 var backend = new Backend({ baseDir: './db' });
 ns.backend(backend);
 
-var admin = new ns.User({
-    nick: "admin",
-    email: "admin@example.com",
-    first_name: "Admin",
-    last_name: "User",
-    age: 30,
-    gender: "Female"
-});
+var foo = new ns.Something({ name: "Foo" });
 
-var foo = new ns.User({
-    nick: "foo",
-    email: "foo@example.com",
-    first_name: "Foo",
-    last_name: "Bar",
-    age: 13,
-    gender: "Male"
-});
+console.log('foo: %j', foo);
 
-var bar = new ns.User({
-    nick: "bar",
-    email: "bar@example.com",
-    first_name: "Bar",
-    last_name: "Foo",
-    age: 18,
-    gender: "Female"
-});
-
-admin.save(function(error)
+foo.save(function(error)
 {
     if(error)
     {
         console.error('Error:', error.stack);
     } // end if
 
-    console.log('Saved the admin user.');
-
-    foo.save(function(error)
-    {
-        if(error)
-        {
-            console.error('Error:', error.stack);
-        } // end if
-
-        console.log('Saved the foo user.');
-
-        bar.save(function(error)
-        {
-            if(error)
-            {
-                console.error('Error:', error.stack);
-            } // end if
-
-            console.log('Saved the bar user.');
-
-            ns.User.find({ gender: "Female" }, function(error, users)
-            {
-                if(error)
-                {
-                    console.error('Error:', error.stack);
-                } // end if
-
-                console.log('Female Users: %j', users);
-            });
-
-            ns.User.findOne({ gender: "Female" }, function(error, user)
-            {
-                if(error)
-                {
-                    console.error('Error:', error.stack);
-                } // end if
-
-                console.log('Just one female User: %j', user);
-            });
-        });
-    });
+    console.log('foo: %j', foo);
 
     console.log('Finsihed NEDB Example');
 });

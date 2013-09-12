@@ -20,9 +20,8 @@ adventurous, go for it. Otherwise, hold off until it's got a few more versions u
 
 These are the big ticket items still missing:
 
-* Automatic IDs - If you don't specify `key: true` in any field, then we should create an AutoID field called `id` for you.
-* `AutoID` field - Currently, this is nebulous; I think we can get away without having special logic in omega models proper; but the backends will need to implement this.
-* `AutoInc` field - No logic in omega-models for this, currently. Not sure if the logic belongs here, or in the backend.
+* `AutoID` field - Backends will need to implement this, where possible. What do we do when a backend doesn't support this?
+* `AutoInc` field - Backend dependant.
 
 ## Backends
 
