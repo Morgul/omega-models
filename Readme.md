@@ -2,8 +2,8 @@
 
 An elegant ORM solution for node.js. Intended to be used with the omega web framework, but **not required**. Supports
 mulitple backends for storage, including [nosql](https://github.com/petersirka/nosql), [mongoDB](http://www.mongodb.org/),
-[riak](http://basho.com/riak/), [redis](http://redis.io/), as well as [SQLite](http://www.sqlite.org/) and
-[PostgreSQL](http://www.postgresql.org/). (It even includes a mock backend for unit tests.)
+[nedb](https://github.com/louischatriot/nedb), [riak](http://basho.com/riak/), [redis](http://redis.io/), as well as
+[SQLite](http://www.sqlite.org/) and [PostgreSQL](http://www.postgresql.org/). (It even includes a mock backend for unit tests.)
 
 These backends are provided by separate projects (except for `nosql`, which is included.)
 
@@ -23,12 +23,12 @@ These are the big ticket items still missing:
 * Automatic IDs - If you don't specify `key: true` in any field, then we should create an AutoID field called `id` for you.
 * `AutoID` field - Currently, this is nebulous; I think we can get away without having special logic in omega models proper; but the backends will need to implement this.
 * `AutoInc` field - No logic in omega-models for this, currently. Not sure if the logic belongs here, or in the backend.
-* `Reference` field - Currently just stores whatever you shove in it. Needs to support storing `$key` instead.
 
 ## Backends
 
 Currently, the only backends that exist are the two built into Omega Models itself. Those are:
-* `nosql` - A flat-file backed database that should be good for development, or light-weight use. (Considered on par with sqlite.)
+* `nedb` - A lightweight, node.js in-memory or file backed database that implements a subset of MongoDB's api. Highly recommended.
+* `nosql` - A node.js flat-file backed database that should be good for development, or lightweight use. (Considered on par with sqlite.)
 * `mock` - A mocked backend, used for unit tests.
 
 See [here](https://github.com/Morgul/omega-models/blob/master/omega-models.js#L80) for how they're exposed.
@@ -43,7 +43,7 @@ All fields have the following options available:
 * `key` - Makes a field as the primary key for this model.
 * `default` - Sets the default value for this field.
 * `required` - This field is required to be not null/undefined in order to save the model.
-* `validators` - A list of functions of the form `function(fieldValue)` that must return true, or an error string.
+* `validators` - A list of functions of the form `function(fieldValue)` that must return true, or an Error object.
 
 ### Field Types
 
