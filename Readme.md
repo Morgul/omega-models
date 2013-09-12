@@ -1,18 +1,18 @@
 # Omega Models
 
 An elegant ORM solution for node.js. Intended to be used with the omega web framework, but **not required**. Supports
-mulitple backends for storage, including [nosql](https://github.com/petersirka/nosql), [mongoDB](http://www.mongodb.org/),
-[nedb](https://github.com/louischatriot/nedb), [riak](http://basho.com/riak/), [redis](http://redis.io/), as well as
-[SQLite](http://www.sqlite.org/) and [PostgreSQL](http://www.postgresql.org/). (It even includes a mock backend for unit tests.)
+mulitple backends for storage, including [mongoDB](http://www.mongodb.org/), [nedb](https://github.com/louischatriot/nedb),
+[riak](http://basho.com/riak/), [redis](http://redis.io/), as well as [SQLite](http://www.sqlite.org/) and
+[PostgreSQL](http://www.postgresql.org/). (It even includes a mock backend for unit tests.)
 
-These backends are provided by separate projects (except for `nosql`, which is included.)
+These backends are provided by separate projects (except for `nedb`, which is included.)
 
 ## Status
 
 [![Build Status](https://travis-ci.org/Morgul/omega-models.png)](https://travis-ci.org/Morgul/omega-models])
 
 I would consider this library 'alpha' quality. I still don't have all of the features I would like, but most of the
-required ones are there. You _can_ use it, and with the built-in `nosql` backend, it will work as expected. I'm lacking
+required ones are there. You _can_ use it, and with the built-in `nedb` backend, it will work as expected. I'm lacking
 a lot of documentation, and while a lot of the system is unit tested, it needs some real-world testing. If you're feeling
 adventurous, go for it. Otherwise, hold off until it's got a few more versions under it's belt.
 
@@ -27,7 +27,6 @@ These are the big ticket items still missing:
 
 Currently, the only backends that exist are the two built into Omega Models itself. Those are:
 * `nedb` - A lightweight, node.js in-memory or file backed database that implements a subset of MongoDB's api. Highly recommended.
-* `nosql` - A node.js flat-file backed database that should be good for development, or lightweight use. (Considered on par with sqlite.)
 * `mock` - A mocked backend, used for unit tests.
 
 See [here](https://github.com/Morgul/omega-models/blob/master/omega-models.js#L80) for how they're exposed.

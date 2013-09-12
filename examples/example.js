@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 //----------------------------------------------------------------------------------------------------------------------
 // Example of using the built-in nosql backend.
 //
@@ -5,8 +7,7 @@
 //----------------------------------------------------------------------------------------------------------------------
 
 var om = require('../omega-models');
-var NoSQLBackend = om.backends.NoSQL;
-//var NEDBBackend = om.backends.NEDB;
+var NeDBBackend = om.backends.NeDB;
 
 // If you check the sample.js, we simply export the namespace object returned by `om.namespace`. This means that we can
 // simply use the return of the require.
@@ -14,11 +15,10 @@ var ns = require('./sample');
 
 //----------------------------------------------------------------------------------------------------------------------
 
-console.log('Starting NoSQL Example...');
+console.log('Starting NeDB Example...');
 
 // Set the backend to a new instance of the NoSQL backend.
-var backend = new NoSQLBackend({ baseDir: './db' });
-//var backend = new NEDBBackend({ baseDir: './db' });
+var backend = new NeDBBackend({ baseDir: './db' });
 ns.backend(backend);
 
 var something = new ns.SomethingElse({
@@ -62,7 +62,7 @@ function queryTest()
                                 {
                                     console.log('Something (after populate): %j', something);
 
-                                    console.log('Finished NoSQL Example.');
+                                    console.log('Finished NeDB Example.');
                                 });
                             });
                         });
@@ -83,7 +83,7 @@ var admin = new ns.User({
     gender: "Female"
 });
 
-admin.save(function(count)
+admin.save(function()
 {
     console.log('Admin User representation: %j', admin);
 
