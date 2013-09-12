@@ -19,6 +19,14 @@ console.log('Starting NoSQL Example...');
 var backend = new NoSQLBackend({ baseDir: './db' });
 ns.backend(backend);
 
+var something = new ns.SomethingElse({
+    name: "something"
+});
+
+var group = new ns.Group({
+    name: 'Test Group'
+});
+
 function queryTest()
 {
     // Find a user by name
@@ -45,7 +53,16 @@ function queryTest()
                         bar.biography = "This is Bar Foo, the younger sister of the infamous Foo Bar. She has lived in his shadow for a long, long time. Now, finally, she can get her own entry in a database."
                         bar.save(function()
                         {
-                            console.log('Finished NoSQL Example.');
+                            ns.SomethingElse.findOne({name: "something"}, function(error, something)
+                            {
+                                console.log('Something: %j', something);
+                                something.populate(function(error, something)
+                                {
+                                    console.log('Something (after populate): %j', something);
+
+                                    console.log('Finished NoSQL Example.');
+                                });
+                            });
                         });
                     });
                 });
@@ -93,8 +110,17 @@ admin.save(function(count)
 
         bar.save(function()
         {
-            console.log('Saving bar user...');
-            queryTest();
+            console.log('Saved bar user.');
+
+            group.save(function()
+            {
+                something.group = group;
+                something.save(function()
+                {
+                    console.log('Saved something instance');
+                    queryTest();
+                });
+            });
         });
     });
 });
