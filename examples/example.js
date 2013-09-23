@@ -52,7 +52,7 @@ function queryTest()
                     {
                         console.log('Updated Bar user: %j', bar);
 
-                        bar.biography = "This is Bar Foo, the younger sister of the infamous Foo Bar. She has lived in his shadow for a long, long time. Now, finally, she can get her own entry in a database."
+                        bar.biography = "This is Bar Foo, the younger sister of the infamous Foo Bar. She has lived in his shadow for a long, long time. Now, finally, she can get her own entry in a database.";
                         bar.save(function()
                         {
                             ns.SomethingElse.findOne({name: "something"}, function(error, something)
@@ -68,8 +68,8 @@ function queryTest()
                         });
                     });
                 });
-            })
-        })
+            });
+        });
     });
 } // end queryTest
 
