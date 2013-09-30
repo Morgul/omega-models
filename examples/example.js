@@ -41,7 +41,7 @@ function queryTest()
         {
             console.log("Female users:", women);
 
-            ns.User.findOneAndUpdate({first_name: 'Foo'}, {age: 15}, function(error, foo)
+            ns.User.findOneAndUpdate({first_name: 'Foo'}, {first_name: 'Foo', age: 15}, function(error, foo)
             {
                 console.log('Updated Foo user: %j', foo);
 
