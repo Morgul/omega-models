@@ -62,6 +62,10 @@ function queryTest()
                                 {
                                     console.log('Something (after populate): %j', something);
 
+                                    something.dePopulate();
+
+                                    console.log('Something (after depopulate): %j', something);
+
                                     console.log('Finished NeDB Example.');
                                 });
                             });
