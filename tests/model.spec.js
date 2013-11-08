@@ -47,6 +47,14 @@ describe('Model', function()
             foo: fields.String(),
             bar: function(){ return this.foo; },
             thisObj: function(){ return this; }
+        },
+        TestRef: {
+            name: fields.String(),
+            sub: fields.Reference({ model: 'TestSubRef' }),
+            subList: fields.List({ type: fields.Reference({ model: 'TestSubRef' }) })
+        },
+        TestSubRef: {
+            omg: fields.String()
         }
     });
     ns.backend(new MockBackend());
@@ -220,6 +228,32 @@ describe('Model', function()
         test2.foo = "Baz!";
         assert(test.foo == "Bar!");
         assert(test2.foo == "Baz!");
+    });
+
+    describe('#populate()', function()
+    {
+        xit('should populate reference fields with their documents', function(done)
+        {
+            assert(false, "Not implemented yet.")
+        });
+
+        xit('should populate lists of reference fields with their documents', function(done)
+        {
+            assert(false, "Not implemented yet.")
+        });
+    });
+
+    describe('#dePopulate()', function()
+    {
+        xit('should depopulate reference fields', function(done)
+        {
+            assert(false, "Not implemented yet.")
+        });
+
+        xit('should depopulate lists of reference fields', function(done)
+        {
+            assert(false, "Not implemented yet.")
+        });
     });
 
     describe('#save()', function()
