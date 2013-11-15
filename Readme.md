@@ -45,6 +45,7 @@ All fields have the following options available:
 
 ### Field Types
 
+* `fields.Any()` - A field that represents any JSON-able value. No checking is done on this field.
 * `fields.AutoID()` - A field that represents an automatically assigned id. (This is dependant on the backend.)
 * `fields.AutoInc()` - An `Integer` field that automatically increments, based on a starting value.
     * `start` - (Optional) The starting value for ids. Defaults to 1.
@@ -57,6 +58,7 @@ All fields have the following options available:
     * `type` - (Optional) a field type instance, defining the underlying field the choice is stored as. Defaults to `Char`.
 * `fields.Date()` - A field to store dates.
 * `fields.DateTime()` - A field to store date and time.
+* `fields.Dict()` - A field that represents a key/value store. Keys are assumed to be strings, and values are assumed to be `fields.Any()`.
 * `fields.File()` - A field that returns a file from the filesystem, however, is stored as a `Char` field path in the database.
     * `basePath` - (Optional) The path under which to store files. Defaults to the field name.
 * `fields.Float()` - A field to store floating point numbers.
@@ -66,7 +68,7 @@ All fields have the following options available:
     * `min` - (Optional) The minimum possible value to be stored.
     * `max` - (Optional) The minimum possible value to be stored.
 * `fields.List()` - A field to store a list of items of one of the other field types. (How this is achieved depends on the backend.)
-    * `type` - (Optional) A field type instance, representing the types that will be stored in this list. (Danger: Some backends may not support mixed types.)
+    * `type` - (Optional) A field type instance, representing the types that will be stored in this list. (Assumed to be `fields.Any` by default.)
 * `fields.Reference()` - A field that refers to another instance of a model.
     * `model` - A string that is the name of a defined model. This reference will only accept instances of that model.
     * `filter` - (Optional) An object, or function that filters the choices for this field to a subset of instances of the Model defined by `model`.
