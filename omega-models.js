@@ -10,6 +10,7 @@ var fields = require('./lib/fields');
 var validators = require('./lib/validators');
 var Model = require('./lib/model');
 var NeDB = require('./lib/backends/nedb');
+var Simple = require('./lib/backends/simple');
 var Mock = require('./lib/backends/mock');
 
 var namespaces = {};
@@ -83,7 +84,8 @@ module.exports = {
     validators: validators,
     backends: {
         NeDB: NeDB,
-        Mock: Mock
+        Mock: Mock,
+        Simple: Simple
     }
 }; // end exports
 
