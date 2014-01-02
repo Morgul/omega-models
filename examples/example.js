@@ -7,7 +7,7 @@
 //----------------------------------------------------------------------------------------------------------------------
 
 var om = require('../omega-models');
-var NeDBBackend = om.backends.NeDB;
+var SimpleBackend = om.backends.Simple;
 
 // If you check the sample.js, we simply export the namespace object returned by `om.namespace`. This means that we can
 // simply use the return of the require.
@@ -15,14 +15,18 @@ var ns = require('./sample');
 
 //----------------------------------------------------------------------------------------------------------------------
 
-console.log('Starting NeDB Example...');
+console.log('Starting Simple Example...');
 
 // Set the backend to a new instance of the NoSQL backend.
-var backend = new NeDBBackend({ baseDir: './db' });
+var backend = new SimpleBackend({ root: './db' });
 ns.backend(backend);
 
-var something = new ns.SomethingElse({
+var something = new ns.Something({
     name: "something"
+});
+
+var somethingElse = new ns.SomethingElse({
+    name: "somethingElse"
 });
 
 var group = new ns.Group({
@@ -55,7 +59,7 @@ function queryTest()
                         bar.biography = "This is Bar Foo, the younger sister of the infamous Foo Bar. She has lived in his shadow for a long, long time. Now, finally, she can get her own entry in a database.";
                         bar.save(function()
                         {
-                            ns.SomethingElse.findOne({name: "something"}, function(error, something)
+                            ns.SomethingElse.findOne({name: "somethingElse"}, function(error, something)
                             {
                                 console.log('Something: %j', something);
                                 something.populate(function(error, something)
@@ -66,7 +70,7 @@ function queryTest()
 
                                     console.log('Something (after depopulate): %j', something);
 
-                                    console.log('Finished NeDB Example.');
+                                    console.log('Finished Simple Example.');
                                 });
                             });
                         });
@@ -120,11 +124,15 @@ admin.save(function()
 
             group.save(function()
             {
-                something.group = group;
-                something.save(function()
+                somethingElse.group = group;
+                somethingElse.save(function()
                 {
-                    console.log('Saved something instance');
-                    queryTest();
+                    console.log('Saved somethingElse instance');
+                    something.save(function()
+                    {
+                        console.log('Saved something instance');
+                        queryTest();
+                    });
                 });
             });
         });
