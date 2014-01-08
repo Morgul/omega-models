@@ -108,17 +108,19 @@ describe('SimpleBackend', function()
             },
             function(backend, done)
             {
-                // Check whether the DB has been gzipped?
-                var dataStr = fs.readFileSync(path.join(gzipDBRoot, 'Something.sdb'), { encoding: 'utf8' });
-
-                zlib.gunzip(dataStr, function(err, buffer)
+                setTimeout(function()
                 {
-                    assert.ifError(err);
+                    // Check whether the DB has been gzipped?
+                    var dataStr = fs.readFileSync(path.join(gzipDBRoot, 'Something.sdb'));
 
-                    assert.deepEqual(JSON.parse(buffer.toString()), something.$values);
+                    zlib.gunzip(dataStr, function(err, buffer)
+                    {
+                        assert.ifError(err);
+                        assert.deepEqual(JSON.parse(buffer.toString()), {});
 
-                    done();
-                });
+                        done();
+                    });
+                }.bind(this), 100);
             });
 
         testOptions('can create a memory-only store',
