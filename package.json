@@ -5,7 +5,7 @@
   "main": "omega-models.js",
   "repository": "https://github.com/Morgul/omega-models",
   "scripts": {
-    "test": "./node_modules/.bin/mocha tests --reporter spec"
+    "test": "./node_modules/.bin/mocha tests --reporter spec --recursive"
   },
   "keywords": [
     "orm",
