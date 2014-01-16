@@ -56,8 +56,12 @@ All fields have the following options available:
 * `fields.Choice()` - A field that limits possible inputs to a specified list of possible values.
     * `choices` - A list of valid choices.
     * `type` - (Optional) a field type instance, defining the underlying field the choice is stored as. Defaults to `Char`.
-* `fields.Date()` - A field to store dates.
+* `fields.Date()` - A field to store dates. (This is the same as DateTimeField, but the time component is always set to 0:00:00.)
+    * `auto` - Automatically update every time the modle is saved. (Useful for 'last modified' fields)
+    * `first` - Set when the model is first created, then never again.
 * `fields.DateTime()` - A field to store date and time.
+    * `auto` - Automatically update every time the modle is saved. (Useful for 'last modified' fields)
+    * `first` - Set when the model is first created, then never again.
 * `fields.Dict()` - A field that represents a key/value store. Keys are assumed to be strings, and values are assumed to be `fields.Any()`.
 * `fields.File()` - A field that returns a file from the filesystem, however, is stored as a `Char` field path in the database.
     * `basePath` - (Optional) The path under which to store files. Defaults to the field name.
