@@ -269,7 +269,7 @@ describe('Model', function()
                 assert.deepEqual(ns.$backend.last, {
                     store: {
                         modelInst: test,
-                        prepared: {foo: test.foo}
+                        prepared: {foo: test.foo, $id: 'some_key'}
                     }
                 });
                 done();
@@ -288,7 +288,7 @@ describe('Model', function()
                 assert.deepEqual(backend.last, {
                     store: {
                         modelInst: test,
-                        prepared: {foo: test.foo}
+                        prepared: {foo: test.foo, $id: 'some_key'}
                     }
                 });
                 done();
