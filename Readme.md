@@ -11,29 +11,28 @@ These backends are provided by separate projects (except for `nedb`, which is in
 
 [![Build Status](https://travis-ci.org/Morgul/omega-models.png)](https://travis-ci.org/Morgul/omega-models])
 
-I would consider this library 'alpha' quality. I still don't have all of the features I would like, but most of the
-required ones are there. You _can_ use it, and with the built-in `nedb` backend, it will work as expected. I'm lacking
-a lot of documentation, and while a lot of the system is unit tested, it needs some real-world testing. If you're feeling
-adventurous, go for it. Otherwise, hold off until it's got a few more versions under it's belt.
+I would consider this library 'beta' quality. I'm quickly reaching the first 'stable' version, and it's been getting some real-world testing through my various other projects. Anything you build off of it should work just fine.
 
 ### Missing Features
 
 These are the big ticket items still missing:
 
-* `AutoID` field - Backends will need to implement this, where possible. What do we do when a backend doesn't support this?
-* `AutoInc` field - Backend dependant.
+* Backend Migration - The ability to migrate data from one backend to another.
+* Initial Data - The ability to import data when the Backend is empty.
+* `AutoInc` field - This is going to be backend dependant, but it requires some API work to make sure backends can handle it.
 
 ## Backends
 
-Currently, the only backends that exist are the two built into Omega Models itself. Those are:
+Currently, the only backends that exist are those built into Omega Models itself:
 * `nedb` - A lightweight, node.js in-memory or file backed database that implements a subset of MongoDB's api. Highly recommended.
+* `simple` - A very lightweight, robust JSON store. It has options for being memory-only and gzip support.
 * `mock` - A mocked backend, used for unit tests.
 
 See [here](https://github.com/Morgul/omega-models/blob/master/omega-models.js#L80) for how they're exposed.
 
 ## Fields
 
-_Note_: Field names starting with `$` are not supported. While they will work in the most part, internally we use
+_Note_: Field names starting with `$` are **not supported**. While they will work in the most part, internally we use
 variables with those names on the instances. If you overwrite them, everything will explode horribly.
 
 All fields have the following options available:
@@ -79,7 +78,7 @@ All fields have the following options available:
 
 ## Tests
 
-If you want to run the tests, please just run:
+If you want to run the tests, just run:
 
 ```bash
 $ npm test
