@@ -1,6 +1,6 @@
 {
   "name": "omega-models",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "An elegant ORM solution for node.js, with support for multiple backends.",
   "main": "omega-models.js",
   "repository": "https://github.com/Morgul/omega-models",
