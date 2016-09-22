@@ -1,3 +1,9 @@
+-----
+
+**Depricated:** This project has been depricated in favor of: [TrivialModels](https://github.com/trivialsoftware/TrivialModels.)
+
+-----
+
 # Omega Models
 
 An elegant ORM solution for node.js. Intended to be used with the omega web framework, but **not required**. Supports
